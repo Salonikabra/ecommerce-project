@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container-fluid p-5 mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-sh">
+                    <div class="card-header text-center fs-4">Add Category</div>
+
+                    <th:block th:if="${success_msg}">
+                        <p class="text-success fw-bold" th:text="${success_msg}"></p>
+                    </th:block>
+                    <th:block th:if="${error_msg}">
+                        <p class="text-danger fw-bold" th:text="${error_msg}"></p>
+                    </th:block>
+                    <th:block th:if="${error1_msg}">
+                        <p class="text-danger fw-bold" th:text="${error1_msg}"></p>
+                    </th:block>
+
+                    <th:block th:if="${error3_msg}">
+                        <p class="text-danger fw-bold" th:text="${error3_msg}"></p>
+                    </th:block>
+                    <th:block th:if="${success}">
+                        <p class="text-danger fw-bold" th:text="${success}"></p>
+                    </th:block>
+                    <th:block th:if="${error}">
+                        <p class="text-danger fw-bold" th:text="${error}"></p>
+                    </th:block>
+
+
+
+
+                    <div class="card-body">
+                        <form action="/admin/saveCategory" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label>Enter Category</label>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                            <div class="mb-3">
+                                <label>Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="isactive" value="true" checked>
+                                    <label class="form-check-label">Active</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="isactive" value="false">
+                                    <label class="form-check-label">Inactive</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label>Upload File</label>
+                                <input type="file" name="imagename" class="form-control">
+                            </div>
+                            <button class="btn btn-primary col-md-12 mt-2">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card card-sh">
+                    <div class="card-header text-center fs-4">Category Details</div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cat, c : ${categories}">
+                                <th scope="row" th:text="${c.count}"></th>
+                                <td th:text="${cat.name}"></td>
+                                <td th:text="${cat.isactive}"></td>
+                            <!-- <td>
+                                    <img th:src="@{'/uploads/' + ${cat.imagename}}" width="50px" height="50px">
+                                <td>-->
+                                <td>    <img th:src="@{'/images/'+${cat.imagename}}" width="50px" height="50px">
+                                </td>
+
+
+                                <td><a th:href="@{'/admin/loadedCategory/'+${cat.id}}" class="btn btn-primary btn-sm"><i
+                                class="fa-solid fa-pen-to-square fa-1x"></i>Edit
+                                </a>
+
+                                    <a th:href="@{'/admin/deleteCategory/'+${cat.id}}" class="btn btn-danger btn-sm"><i
+                                class="fa-solid fa-trash fa-1x"></i>Delete</a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
