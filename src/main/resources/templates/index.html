@@ -33,99 +33,124 @@
     <!-- End Slider -->
 
     <!-- Start Category Module -->
+    <!-- Start Category Module -->
     <div class="container mt-4">
         <p class="text-center fw-bold fs-4">Category</p>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 text-center">
-            <div class="col">
-                <img src="/images/appli.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
-                <p>Electronics</p>
-            </div>
-            <div class="col">
-                <img src="/images/laptop.jpg" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
-                <p>Laptop</p>
-            </div>
-            <div class="col">
-                <img src="/images/mobile.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
-                <p>Mobile Phone</p>
-            </div>
-            <div class="col">
-                <img src="/images/cloth.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
-                <p>Cloth</p>
-            </div>
-            <div class="col">
-                <img src="/images/beuty.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
-                <p>Fashion</p>
-            </div>
-            <div class="col">
-                <img src="/images/book.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
-                <p>Book</p>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
+            <div class="col text-center" th:each="c:${categories}">
+               <!-- <img th:src="@{'/images/'+${c.imagename}}" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary" alt="Category">-->
+              <!--  <img th:src="@{'/images/'+${c.imagename}}"
+                     class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary"
+                     style="width: 120px; height: 120px; object-fit: cover;"
+                     alt="Category">-->
+                <img th:src="@{'/images/'+${c.imagename}}"
+                     class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary"
+                     style="width: 200px; height: 200px; object-fit: cover;"
+                     alt="Category">
+
+                <a th:href="@{'/products?category='+${c.name}}" class="text-decoration-none mt-2">[[${c.name}]]</a>
             </div>
         </div>
     </div>
+    <!-- End Category Module -->
+
+
+    <!-- <div class="col">
+         <img src="/images/laptop.jpg" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
+         <p>Laptop</p>
+     </div>
+
+     <div class="col">
+         <img src="/images/mobile.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
+         <p>Mobile Phone</p>
+     </div>
+
+     <div class="col">
+         <img src="/images/cloth.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
+         <p>Cloth</p>
+     </div>
+
+     <div class="col">
+         <img src="/images/beuty.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
+         <p>Fashion</p>
+     </div>
+
+     <div class="col">
+         <img src="/images/book.png" class="rounded-circle img-fluid shadow-sm p-3 bg-body-tertiary">
+         <p>Book</p>
+     </div>-->
+
+
     <!-- End Category Module -->
 
     <!-- Start Latest Product Module -->
     <div class="container-fluid bg-light p-3">
         <p class="text-center fw-bold fs-4">Latest Products</p>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-            <div class="col">
+            <div class="col" th:each="p:${products}">
                 <div class="card text-center">
                     <div class="card-body">
-                        <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <img src="/imagess/laptop.jpg" class="img-fluid" alt="HP Laptop">
-                        <p>HP Laptop</p>
+                        <img th:src="@{'/images/'+${p.image}}"
+                             class="img-fluid"
+                             style="width: 200px; height: 200px; object-fit: cover;"
+                             alt="Product Image">
+                        <p class="text-center"><a th:href="@{'/view/'+${p.id}}" class="text-decoration-none">[[${p.title}]]</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!--  <div class="col">
+           <div class="card text-center">
+               <div class="card-body">
+                   <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
+                   <p>HP Laptop</p>
+               </div>
+           </div>
+       </div>
+       <div class="col">
+           <div class="card text-center">
+               <div class="card-body">
+                   <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
+                   <p>HP Laptop</p>
+               </div>
+           </div>
+       </div>
+       <div class="col">
+           <div class="card text-center">
+               <div class="card-body">
+                   <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
+                   <p>HP Laptop</p>
+               </div>
+           </div>
+       </div>
+       <div class="col">
+           <div class="card text-center">
+               <div class="card-body">
+                   <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
+                   <p>HP Laptop</p>
+               </div>
+           </div>
+       </div>
+       <div class="col">
+           <div class="card text-center">
+               <div class="card-body">
+                   <img src="/images/laptop.jpg" class="img-fluid" alt="HP Laptop">
+                   <p>HP Laptop</p>
+               </div>
+           </div>
+       </div>
+       <div class="col">
+           <div class="card text-center">
+               <div class="card-body">
+                   <img src="/imagess/laptop.jpg" class="img-fluid" alt="HP Laptop">
+                   <p>HP Laptop</p>
+               </div>
+           </div>
+       </div>-->
+
     <!-- End Latest Product Module -->
     <!--start footer-->
 

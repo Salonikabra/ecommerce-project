@@ -4,6 +4,9 @@ import com.example.ecommerce.model.Category;
 import com.example.ecommerce.repository.CategoryRepository;
 import com.example.ecommerce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -60,6 +63,13 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories=categoryRepository.findByIsactiveTrue();
 
         return categories;
+    }
+
+    @Override
+    public Page<Category> getAllCategoryPagination(Integer pageNo,Integer pageSize) {
+        Pageable pageable=PageRequest.of(pageNo,pageSize);
+        return categoryRepository.findAll(pageable);
+
     }
 
 

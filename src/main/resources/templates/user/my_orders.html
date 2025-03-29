@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section>
+    <div class="container-fluid mt-5 p-5">
+
+        <div class="card card-sh">
+            <div class="card-header text-center">
+                <p class="fs-4">My Orders</p>
+                <th:block th:if="${success}">
+                    <p class="text-success fw-bold" th:text="${success}"></p>
+                </th:block>
+                <th:block th:if="${error}">
+                    <p class="text-danger fw-bold" th:text="${error}"></p>
+                </th:block>
+                <div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+
+                            <tr>
+                                <th scope="col">sno.</th>
+                                <th scope="col">Order Id</th>
+                                <th scope="col">Date</th>
+
+                                <th scope="col">Product Details</th>
+
+                                <th scope="col">Price</th>
+                                <th scope="col">Status</th>
+
+                                <th scope="col">Action</th>
+
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p, c : ${orders}">
+                                <th scope="row">[[${c.count}]]</th>
+
+
+                                <td>[[${p.orderid}]]</td>
+                                <td>[[${p.orderdate}]]</td>
+                                <td>[[${p.product.title}]]</td>
+                                <td>Quantity :  [[${p.quantity}]] <br>Price : [[${p.price}]]<br>
+                                    Total Price  :  [[${p.quantity *  p.price}]]</td>
+                                <td>
+
+
+
+
+
+                                    [[${p.status}]]
+
+
+
+                                </td>
+                                <td>
+
+                                    <th:block th:if="${p.status!='Cancelled'}">
+                                        <a th:href="@{'/user/update-status?id='+${p.id}+'&st=6'}" class="btn btn-sm btn-danger">
+                                            <i class="fa-solid fa-trash-can"></i> Cancel
+                                        </a>
+
+                                    </th:block>
+
+                                    <th:block th:unless="${p.status!='Cancelled'}">
+                                        <a href="#" class="btn btn-sm btn-danger disabled">
+                                            <i class="fa-solid fa-trash-can"></i> Cancel
+                                        </a>
+
+                                    </th:block>
+
+
+
+
+
+
+
+
+
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

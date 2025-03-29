@@ -3,6 +3,14 @@
       th:replace="~{base::Layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
+
+
+   <!-- <th:block th:if="${success}">
+        <p class="text-success fw-bold" th:text="${success}"></p>
+    </th:block>
+    <th:block th:if="${error}">
+        <p class="text-danger fw-bold" th:text="${error}"></p>
+    </th:block>-->
     <title>Product Details</title>
 </head>
 <body>
@@ -12,9 +20,25 @@
         <div class="col-md-12 p-5">
             <div class="row">
                 <div class="col-md-6 text-end">
+
+               <!-- <th:block th:if="${success}">
+                    <p class="text-success fw-bold" th:text="${success}"></p>
+                </th:block>
+                <th:block th:if="${error}">
+                    <p class="text-danger fw-bold" th:text="${error}"></p>
+                </th:block>-->
+             <!--   <div class="col-md-6 text-end">-->
                     <img th:src="@{'/images/'+${product.image}}" alt="Product Image" width="330px" height="400px">
                 </div>
                 <div class="col-md-6">
+
+                    <th:block th:if="${success}">
+                        <p class="text-success fw-bold" th:text="${success}"></p>
+                    </th:block>
+                    <th:block th:if="${error}">
+                        <p class="text-danger fw-bold" th:text="${error}"></p>
+                    </th:block>
+
                     <p class="fs-3">[[${product.title}]]</p>
                     <p>
                         <span class="fw-bold">Description:</span><br>[[${product.description}]]
@@ -58,7 +82,19 @@
 
 
                     <th:block th:if="${product.stock > 0}">
-                        <a href="#" class="btn btn-danger col-md-12">Add To Cart</a>
+                        <th:block th:if="${user==null}">
+                        <a href="/signin" class="btn btn-danger col-md-12">Add To Cart</a>
+                        </th:block>
+
+
+                        <th:block th:unless="${user==null}">
+                          <!--  <a th:href="@{'/addCart?pid='+${product.id}+'&uid='+${user.id}}" class="btn btn-danger col-md-12">Add To Cart</a>-->
+                            <!--<a th:href="@{user/addCart(pid=${product.id}, uid=${user.id})}" class="btn btn-danger col-md-12">Add To Cart</a>-->
+                            <a th:href="@{/user/addCart(pid=${product.id}, uid=${user.id})}" class="btn btn-danger col-md-12">Add To Cart</a>
+
+
+                        </th:block>
+
                     </th:block>
                     <th:block th:unless="${product.stock > 0}">
                         <a href="#" class="btn text-white btn-warning col-md-12">Out Of Stock</a>
